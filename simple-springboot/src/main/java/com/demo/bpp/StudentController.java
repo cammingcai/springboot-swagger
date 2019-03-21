@@ -9,6 +9,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +29,71 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * @author junhong
+ *
+ *
+ *  @Api()用于类；
+ * 表示标识这个类是swagger的资源
+ * - @ApiOperation()用于方法；
+ * 表示一个http请求的操作
+ * - @ApiParam()用于方法，参数，字段说明；
+ * 表示对参数的添加元数据（说明或是否必填等）
+ * - @ApiModel()用于类
+ * 表示对类进行说明，用于参数用实体类接收
+ * - @ApiModelProperty()用于方法，字段
+ * 表示对model属性的说明或者数据操作更改
+ * - @ApiIgnore()用于类，方法，方法参数
+ * 表示这个方法或者类被忽略
+ * - @ApiImplicitParam() 用于方法
+ * 表示单独的请求参数
+ * - @ApiImplicitParams() 用于方法，包含多个 @ApiImplicitParam
+ *
+ * 具体使用举例说明：
+ * @Api()
+ * 用于类；表示标识这个类是swagger的资源
+ * tags–表示说明
+ * value–也是说明，可以使用tags替代
+ * 但是tags如果有多个值，会生成多个list
+ *
+ * @ApiOperation() 用于方法；表示一个http请求的操作
+ * value用于方法描述
+ * notes用于提示内容
+ * tags可以重新分组（视情况而用）
+ * @ApiParam() 用于方法，参数，字段说明；表示对参数的添加元数据（说明或是否必填等）
+ * name–参数名
+ * value–参数说明
+ * required–是否必填
+ *
+ *
+ * @ApiModel()用于类 ；表示对类进行说明，用于参数用实体类接收
+ * value–表示对象名
+ * description–描述
+ * 都可省略
+ * @ApiModelProperty()用于方法，字段； 表示对model属性的说明或者数据操作更改
+ * value–字段说明
+ * name–重写属性名字
+ * dataType–重写属性类型
+ * required–是否必填
+ * example–举例说明
+ * hidden–隐藏
+ *
+ *
+ * @ApiIgnore()用于类或者方法上，可以不被swagger显示在页面上
+ * 比较简单, 这里不做举例
+ *
+ * @ApiImplicitParam() 用于方法
+ * 表示单独的请求参数
+ * @ApiImplicitParams() 用于方法，包含多个 @ApiImplicitParam
+ * name–参数ming
+ * value–参数说明
+ * dataType–数据类型
+ * paramType–参数类型
+ * example–举例说明
+ *
  */
 
 @RequestMapping("/")
 @Controller
+@ApiModel(value="用户操作接口")
 public class StudentController {
 
     @Resource
@@ -60,7 +124,7 @@ public class StudentController {
     @ApiOperation("基础POST请求")
     @PostMapping("/index.do")
     @ResponseBody
-    public String indexPost(@RequestBody Student student) {
+    public String indexPost(@RequestBody  @ApiParam(name="基础POST",value="基础POST请求",required=true) Student student) {
         // 使用json的方式去提交
         String name = student.getName();
         return "{\"name\":\"" + name + "\"}";
@@ -82,9 +146,25 @@ public class StudentController {
         Map<String, Object> map = new HashMap<>(2);
         map.put("id", id);
         map.put("age", age);
-
         return JSON.toJSONString(map);
     }
+
+
+    @ApiOperation("带上?参数的GET请求")
+    @GetMapping("/erhuowei/")
+    @ResponseBody
+
+    public String erhuoweiGetWithPar(@RequestParam String name, @RequestParam int age
+    , @RequestParam String address, @RequestParam String aib) {
+        // get的方式，带上get请求的参数
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", name);
+        map.put("age", age);
+        map.put("address", address);
+        map.put("aib", aib);
+        return JSON.toJSONString(map);
+    }
+
 
     @ApiOperation("Map参数的POST请求")
     @PostMapping("/indexPost")
@@ -108,7 +188,6 @@ public class StudentController {
         Map<String, Object> map = new HashMap<>(2);
         map.put("id", studentService.getName(student));
         map.put("age", studentService.getAge(student));
-
         return JSON.toJSONString(map);
     }
 

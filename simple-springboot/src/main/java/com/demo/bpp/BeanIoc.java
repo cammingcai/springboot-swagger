@@ -69,8 +69,8 @@ public class BeanIoc {
     public Docket docket() {
 
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("Spring Boot Swagger DEMO")
-                .description("学习swagger")
+                .title("学习Spring Boot Swagger ")
+                .description("学习swagger哈哈哈哈哈哈哈")
                 .version("1.0")
                 .build();
 

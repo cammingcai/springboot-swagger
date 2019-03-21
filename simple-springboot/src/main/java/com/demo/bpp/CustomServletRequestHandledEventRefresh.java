@@ -5,6 +5,9 @@ import org.springframework.web.context.support.ServletRequestHandledEvent;
 import org.springframework.web.servlet.FrameworkServlet;
 
 import com.alibaba.fastjson.JSON;
+import sun.rmi.runtime.Log;
+
+import java.util.logging.Logger;
 
 /**
  * @author junhong
@@ -23,6 +26,7 @@ public class CustomServletRequestHandledEventRefresh implements ApplicationListe
         int statusCode = event.getStatusCode();
         long time = event.getTimestamp();
 
+       // Logger.();
         System.out.println(JSON.toJSONString(event));
     }
 }
