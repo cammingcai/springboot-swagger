@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<context:property-placeholder location="simple-spring-demo/src/main/resources/pro.properties" />-->
+
+    <context:property-placeholder location="pro.properties" />
+
+    <bean name="studentFactory" class="com.demo.bpp.StudentFactoryBean" />
+
+    <!--<bean name="student" class="com.demo.Student" init-method="init">-->
+        <!--<constructor-arg index="0" value="zhangsan" />-->
+        <!--<constructor-arg index="1" value="17" />-->
+    <!--</bean>-->
+
+
+
+
+    <context:component-scan base-package="com.demo"/>
+
+
+    <!--<bean class="com.demo.BeanPostProcessor.CustomBeanFactoryPostProcessor" id="customBeanFactoryPostProcessor" />-->
+    <!--<bean class="com.demo.BeanPostProcessor.CustomBeanPostProcessor" id="customBeanPostProcessor" />-->
+
+    <!--<context:annotation-config />-->
+
+
+
+
+</beans>

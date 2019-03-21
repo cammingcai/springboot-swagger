@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:property-placeholder location="pro.properties" />
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="com.demo.aop" />
+
+    <!--<bean name="student" class="com.demo.Student" init-method="init">-->
+        <!--<constructor-arg index="0" value="lisi" />-->
+        <!--<constructor-arg index="1" value="18" />-->
+    <!--</bean>-->
+
+
+
+    <bean class="com.demo.bpp.aop.AnimalImpl" id="animal" />
+    <!--<bean class="com.demo.Aop.AnimalAop" id="animalAop" />-->
+    <!--<bean class="com.demo.Aop1.AnimalAop2" id="animalAop2" />-->
+
+    <!--<aop:aspectj-autoproxy>-->
+        <!--<aop:include name=".*Aop$" />-->
+    <!--</aop:aspectj-autoproxy>-->
+
+
+    <!--<bean id="people" class="com.demo.Aop.People" />-->
+    <!--<bean id="peopleAop" class="com.demo.Aop.PeopleAop" />-->
+
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="pc" expression="execution(* com.demo.Aop.*.*(..))" />-->
+        <!--<aop:pointcut id="pc1" expression="execution(* com.demo.Aop1.*.*(..))" />-->
+        <!--<aop:aspect ref="peopleAop">-->
+            <!--<aop:after method="after" pointcut-ref="pc"/>-->
+            <!--<aop:around method="around" pointcut-ref="pc" />-->
+            <!--<aop:before method="before" pointcut-ref="pc" />-->
+            <!--<aop:after-returning method="afterReturn" pointcut-ref="pc" />-->
+            <!--<aop:after-throwing method="excep" pointcut-ref="pc" />-->
+            <!--<aop:after method="after" pointcut-ref="pc1" />-->
+        <!--</aop:aspect>-->
+
+    <!--</aop:config>-->
+
+
+</beans>
